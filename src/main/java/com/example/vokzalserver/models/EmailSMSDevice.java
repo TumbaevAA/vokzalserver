@@ -9,8 +9,7 @@ public class EmailSMSDevice {
     private Long id;
     private String name;
     private String description;
-    private String status;
-    private String statusText;
+    private int status;
     private List<EmailSMSItem> item;
 
     public static EmailSMSDevice toModel(DeviceEntity deviceEntity){
@@ -19,7 +18,6 @@ public class EmailSMSDevice {
         emailSMSDevice.name = deviceEntity.getName();
         emailSMSDevice.description = deviceEntity.getDescription();
         emailSMSDevice.status = deviceEntity.getStatus();
-        emailSMSDevice.statusText = deviceEntity.getStatusText();
 
         /*У смс- и email-устройств один канал, поэтому берем нулевой элемент в списке.
          * Далее из каждого itemEntity создаем столько моделей, сколько у этого
@@ -47,12 +45,8 @@ public class EmailSMSDevice {
         return description;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
-    }
-
-    public String getStatusText() {
-        return statusText;
     }
 
     public List<EmailSMSItem> getItem() {

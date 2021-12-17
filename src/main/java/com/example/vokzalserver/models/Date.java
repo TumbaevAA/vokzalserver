@@ -1,6 +1,6 @@
 package com.example.vokzalserver.models;
 
-/**Этот класс нужен для отображения даты в json так, как требует фронтенд*/
+//Этот класс нужен для отображения даты в json так, как требует фронтенд
 public class Date {
     private String year;
     private String month;

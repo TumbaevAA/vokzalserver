@@ -21,10 +21,7 @@ public class DeviceEntity {
     private String type;
 
     @Column(name = "status", nullable = false)
-    private String status;
-
-    @Column(name = "status_text", nullable = false)
-    private String statusText;
+    private int status;
 
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "device",
@@ -51,12 +48,8 @@ public class DeviceEntity {
         return type;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
-    }
-
-    public String getStatusText() {
-        return statusText;
     }
 
     public List<ChannelEntity> getChannels() {
