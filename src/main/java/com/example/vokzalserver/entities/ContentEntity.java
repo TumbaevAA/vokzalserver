@@ -40,6 +40,8 @@ public class ContentEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "content")
     List<ItemEntity> items;
 
+
+
     public ContentEntity() {
     }
 

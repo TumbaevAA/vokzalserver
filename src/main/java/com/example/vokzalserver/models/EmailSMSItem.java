@@ -16,21 +16,21 @@ public class EmailSMSItem {
     private String content;
     private int status;
 
-    public static EmailSMSItem toModel(ItemEntity itemEntity){
+    public static EmailSMSItem toModel(ItemEntity entity){
         EmailSMSItem model = new EmailSMSItem();
 
-        model.id = itemEntity.getId();
-        model.name = itemEntity.getContent().getName();
-        model.date = new Date(String.valueOf(itemEntity.getDateTimePlayback().getYear()),
-                                String.valueOf(itemEntity.getDateTimePlayback().getMonthValue()),
-                                String.valueOf(itemEntity.getDateTimePlayback().getDayOfMonth()),
-                                itemEntity.getDateTimePlayback().format(DateTimeFormatter.ofPattern("HH:mm")));
+        model.id = entity.getId();
+        model.name = entity.getContent().getName();
+        model.date = new Date(String.valueOf(entity.getDateTimePlayback().getYear()),
+                                String.valueOf(entity.getDateTimePlayback().getMonthValue()),
+                                String.valueOf(entity.getDateTimePlayback().getDayOfMonth()),
+                                entity.getDateTimePlayback().format(DateTimeFormatter.ofPattern("HH:mm")));
 
         /*Достаем список получателей. Если получатель один, то записываем его адрес
         в recipient, если больше, то ищем название группы получателей
         и записываем в group
         */
-        List<RecipientEntity> recipients = itemEntity.getRecipients();
+        List<RecipientEntity> recipients = entity.getRecipients();
         if(recipients.size() == 1){
             model.group = "-";
             model.recipient = recipients.get(0).getAddress();
@@ -41,8 +41,8 @@ public class EmailSMSItem {
             model.group = recipients.get(0).getGroupsThatRecipientBelongsTo().get(0).getName();
         }
 
-        model.content = itemEntity.getContent().getContent();
-        model.status = itemEntity.getStatus();
+        model.content = entity.getContent().getContent();
+        model.status = entity.getStatus();
 
         return model;
     }

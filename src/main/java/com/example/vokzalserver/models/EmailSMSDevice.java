@@ -12,19 +12,23 @@ public class EmailSMSDevice {
     private int status;
     private List<EmailSMSItem> item;
 
-    public static EmailSMSDevice toModel(DeviceEntity deviceEntity){
-        EmailSMSDevice emailSMSDevice = new EmailSMSDevice();
-        emailSMSDevice.id = deviceEntity.getId();
-        emailSMSDevice.name = deviceEntity.getName();
-        emailSMSDevice.description = deviceEntity.getDescription();
-        emailSMSDevice.status = deviceEntity.getStatus();
+    public static EmailSMSDevice toModel(DeviceEntity entity){
+        EmailSMSDevice model = new EmailSMSDevice();
+        model.id = entity.getId();
+        model.name = entity.getName();
+        model.description = entity.getDescription();
+        model.status = entity.getStatus();
 
         /*У смс- и email-устройств один канал, поэтому берем нулевой элемент в списке.
           Далее из каждого itemEntity создаем столько модель, модели добавляем в поле item */
-        emailSMSDevice.item = deviceEntity.getChannels().get(0).getItems().
+        model.item = entity.getChannels().get(0).getItems().
                 stream().map(EmailSMSItem::toModel).collect(Collectors.toList());
 
-        return emailSMSDevice;
+        return model;
+    }
+
+
+    public EmailSMSDevice() {
     }
 
     public Long getId() {
