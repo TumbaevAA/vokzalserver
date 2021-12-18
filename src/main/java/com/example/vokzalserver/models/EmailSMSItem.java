@@ -1,7 +1,7 @@
 package com.example.vokzalserver.models;
 
 import com.example.vokzalserver.entities.ItemEntity;
-import com.example.vokzalserver.entities.PlaylistEntity;
+import com.example.vokzalserver.entities.RecipientEntity;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -16,7 +16,7 @@ public class EmailSMSItem {
     private String content;
     private int status;
 
-    public static EmailSMSItem toModel(ItemEntity itemEntity, int recipientListIndex){
+    public static EmailSMSItem toModel(ItemEntity itemEntity){
         EmailSMSItem model = new EmailSMSItem();
 
         model.id = itemEntity.getId();
@@ -24,28 +24,22 @@ public class EmailSMSItem {
         model.date = new Date(String.valueOf(itemEntity.getDateTimePlayback().getYear()),
                                 String.valueOf(itemEntity.getDateTimePlayback().getMonthValue()),
                                 String.valueOf(itemEntity.getDateTimePlayback().getDayOfMonth()),
-                                itemEntity.getDateTimePlayback().format(DateTimeFormatter.ofPattern("HHmm")));
+                                itemEntity.getDateTimePlayback().format(DateTimeFormatter.ofPattern("HH:mm")));
 
-        /*Достаем список плейлистов, в которых есть контент из item.
-         * Если список не равен null, то достаем имя 0-го плейлиста из списка.
-         * Можно взять имя только одного плейлиста, потому что так требует фронтенд.
-         * Делать одинаковые item, в которых отличается только имя плейлиста не стал, так как
-         * то же самое сделано ниже с получателем, из-за этого повторяется много строчек.
-         * */
-        List<PlaylistEntity> list = itemEntity.getContent().getPlaylistsThatContentBelongsTo();
-        if(list.size() != 0){
-            model.group = list.get(0).getPlaylist().getName();
-        }
-        else{
+        /*Достаем список получателей. Если получатель один, то записываем его адрес
+        в recipient, если больше, то ищем название группы получателей
+        и записываем в group
+        */
+        List<RecipientEntity> recipients = itemEntity.getRecipients();
+        if(recipients.size() == 1){
             model.group = "-";
+            model.recipient = recipients.get(0).getAddress();
         }
-
-
-        /*Находим получателя под номером recipientListIndex
-         * и присваиваем полю recipient поле address этого получателя.
-         * Так как во фронтенде в item может быть только один получатель
-         */
-        model.recipient = itemEntity.getRecipients().get(recipientListIndex).getAddress();
+//TODO Алгоритм, который будет брать группы всех получателей и среди них искать одинаковую для всех
+        else{
+            model.recipient = "-";
+            model.group = recipients.get(0).getGroupsThatRecipientBelongsTo().get(0).getName();
+        }
 
         model.content = itemEntity.getContent().getContent();
         model.status = itemEntity.getStatus();

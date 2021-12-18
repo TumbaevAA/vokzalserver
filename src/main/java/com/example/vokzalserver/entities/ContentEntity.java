@@ -12,12 +12,12 @@ public class ContentEntity {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    /**Если эта связь не null, то контент является плейлистом.
+    /*Если эта связь не null, то контент является плейлистом.
      *Связь нужна, чтобы получать доступ к содержанию плейлиста*/
     @OneToMany(mappedBy = "playlist")
     private List<PlaylistEntity> playlist;
 
-    /**Через эту связь в таблице playlist указывается, какой контент входит в плейлист.
+    /*Через эту связь в таблице playlist указывается, какой контент входит в плейлист.
      * То есть, если эта связь не null, то этот контент входит в плейлист(ы) из списка*/
     @OneToMany(mappedBy = "content")
     private List<PlaylistEntity> playlistsThatContentBelongsTo;

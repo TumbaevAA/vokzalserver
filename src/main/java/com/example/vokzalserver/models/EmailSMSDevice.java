@@ -2,8 +2,8 @@ package com.example.vokzalserver.models;
 
 import com.example.vokzalserver.entities.DeviceEntity;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EmailSMSDevice {
     private Long id;
@@ -20,15 +20,9 @@ public class EmailSMSDevice {
         emailSMSDevice.status = deviceEntity.getStatus();
 
         /*У смс- и email-устройств один канал, поэтому берем нулевой элемент в списке.
-         * Далее из каждого itemEntity создаем столько моделей, сколько у этого
-         * itemEntity получателей, модели добавляем в поле items
-         * */
-        emailSMSDevice.item = new ArrayList<>();
-        deviceEntity.getChannels().get(0).getItems().forEach(itemEntity -> {
-                    for (int i = 0; i < itemEntity.getRecipients().size(); i++){
-                        emailSMSDevice.item.add(EmailSMSItem.toModel(itemEntity, i));
-                    }
-                });
+          Далее из каждого itemEntity создаем столько модель, модели добавляем в поле item */
+        emailSMSDevice.item = deviceEntity.getChannels().get(0).getItems().
+                stream().map(EmailSMSItem::toModel).collect(Collectors.toList());
 
         return emailSMSDevice;
     }

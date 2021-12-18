@@ -20,6 +20,12 @@ public class RecipientEntity {
             inverseJoinColumns = @JoinColumn(name = "item_id", nullable = false))
     private List<ItemEntity> items;
 
+    @ManyToMany
+    @JoinTable(name = "recipient_group",
+            joinColumns = @JoinColumn(name = "recipient_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false))
+    private List<GroupEntity> groupsThatRecipientBelongsTo;
+
 
     public RecipientEntity() {
     }
@@ -32,7 +38,11 @@ public class RecipientEntity {
         return address;
     }
 
-    public List<ItemEntity> getRecipients() {
+    public List<ItemEntity> getItems() {
         return items;
+    }
+
+    public List<GroupEntity> getGroupsThatRecipientBelongsTo() {
+        return groupsThatRecipientBelongsTo;
     }
 }
