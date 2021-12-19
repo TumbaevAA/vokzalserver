@@ -1,23 +1,21 @@
 package com.example.vokzalserver.models;
 
 import com.example.vokzalserver.entities.ItemEntity;
-import com.example.vokzalserver.entities.RecipientEntity;
 
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 
-public class EmailSMSItem {
+public class EmailSMSItemGetting {
     private long id;
-    private String name;
+    private String name;        //Имя контента, который содержится в item
     private Date date;
-    private String group;
-    private String recipient;
-    private String content;
+    private String group;       //Группа получателей. Если получатель 1 равно null
+    private String recipient;   //Получатель. Если получатель не один равно null
+    private String content;     //Содержание контента, который содержится в item
     private int status;
 
-    public static EmailSMSItem toModel(ItemEntity entity){
-        EmailSMSItem model = new EmailSMSItem();
+    public static EmailSMSItemGetting toModel(ItemEntity entity){
+        EmailSMSItemGetting model = new EmailSMSItemGetting();
 
         model.id = entity.getId();
         model.name = entity.getContent().getName();
@@ -26,19 +24,16 @@ public class EmailSMSItem {
                                 String.valueOf(entity.getDateTimePlayback().getDayOfMonth()),
                                 entity.getDateTimePlayback().format(DateTimeFormatter.ofPattern("HH:mm")));
 
-        /*Достаем список получателей. Если получатель один, то записываем его адрес
-        в recipient, если больше, то ищем название группы получателей
-        и записываем в group
+        /*Достаем имя группы. Если имя null, то получатель один, достаем получателя.
+        Если имя группы не null, то добавляем имя группы в модель
         */
-        List<RecipientEntity> recipients = entity.getRecipients();
-        if(recipients.size() == 1){
+        if(entity.getGroupName() == null){
             model.group = "-";
-            model.recipient = recipients.get(0).getAddress();
+            model.recipient = entity.getRecipients().get(0).getAddress();
         }
-//TODO Алгоритм, который будет брать группы всех получателей и среди них искать одинаковую для всех
         else{
             model.recipient = "-";
-            model.group = recipients.get(0).getGroupsThatRecipientBelongsTo().get(0).getName();
+            model.group = entity.getGroupName();
         }
 
         model.content = entity.getContent().getContent();
@@ -48,7 +43,7 @@ public class EmailSMSItem {
     }
 
 
-    public EmailSMSItem() {
+    public EmailSMSItemGetting() {
     }
 
     public long getId() {

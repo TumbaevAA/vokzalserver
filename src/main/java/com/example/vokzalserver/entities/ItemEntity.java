@@ -52,6 +52,16 @@ public class ItemEntity {
         return recipients;
     }
 
+    public String getGroupName(){
+        if(this.getRecipients().size() == 1){
+            return null;
+        }
+        else{
+//TODO Алгоритм, который будет брать группы всех получателей и среди них искать одинаковую для всех
+            return this.getRecipients().get(0).getGroupsThatRecipientBelongsTo().get(0).getName();
+        }
+    }
+
     public LocalDateTime getDateTimePlayback() {
         return dateTimePlayback;
     }
