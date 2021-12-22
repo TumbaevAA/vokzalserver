@@ -4,6 +4,7 @@ import com.example.vokzalserver.models.ContentPosting;
 import com.example.vokzalserver.services.ContentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -17,7 +18,12 @@ public class ContentController {
     }
 
     @PostMapping("Json/ContentDeviceSmsPost")
-    public ResponseEntity saveSMSContent(@RequestBody ContentPosting content){
+    public ResponseEntity saveSMS(@RequestBody ContentPosting content){
         return ResponseEntity.ok(contentService.saveOrUpdateSMS(content));
+    }
+
+    @GetMapping("Json/ContentDeviceSmsGet.json")
+    public ResponseEntity getSMS(){
+        return ResponseEntity.ok(contentService.getAllSMS());
     }
 }

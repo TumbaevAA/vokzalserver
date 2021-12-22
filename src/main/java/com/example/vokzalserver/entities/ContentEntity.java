@@ -21,7 +21,7 @@ public class ContentEntity {
     private String type;
 
     @Column(name = "content", nullable = false)
-    private String content;
+    private String content;                    //содержание контента, либо описание плейлиста
 
     @Column(name = "duration")
     private Duration duration;
