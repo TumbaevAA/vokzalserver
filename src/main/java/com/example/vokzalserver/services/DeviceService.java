@@ -18,7 +18,7 @@ public class DeviceService {
         this.deviceRepository = deviceRepository;
     }
 
-    public List<EmailSMSDeviceGetting> getAllSMSDevices(){
+    public List<EmailSMSDeviceGetting> getAllSMS(){
         List<DeviceEntity> devicesEntity = deviceRepository.findAllByType("SMS");
 
         /*Для каждого элемента deviceEntity используем функцию EmailSMSDeviceGetting.toModel()*/

@@ -52,13 +52,13 @@ public class ItemEntity {
         return recipients;
     }
 
-    public String getGroupName(){
+    public GroupEntity getGroup(){
         if(this.getRecipients().size() == 1){
             return null;
         }
         else{
 //TODO Алгоритм, который будет брать группы всех получателей и среди них искать одинаковую для всех
-            return this.getRecipients().get(0).getGroupsThatRecipientBelongsTo().get(0).getName();
+            return this.getRecipients().get(0).getGroupsThatRecipientBelongsTo().get(0);
         }
     }
 

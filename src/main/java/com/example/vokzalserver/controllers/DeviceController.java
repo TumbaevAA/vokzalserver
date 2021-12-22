@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("Json/SMSDevice.json")
 public class DeviceController {
     private final DeviceService deviceService;
 
@@ -15,10 +14,10 @@ public class DeviceController {
         this.deviceService = deviceService;
     }
 
-    @GetMapping
+    @GetMapping("Json/SMSDevice.json")
     private ResponseEntity getAllSMSDevices(){
-        return ResponseEntity.ok(deviceService.getAllSMSDevices());
+        return ResponseEntity.ok(deviceService.getAllSMS());
     }
 
-    
+
 }

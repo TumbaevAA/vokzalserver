@@ -6,11 +6,11 @@ import java.time.format.DateTimeFormatter;
 
 
 public class EmailSMSItemGetting {
-    private long id;
+    private Long id;
     private String name;        //Имя контента, который содержится в item
     private Date date;
-    private String group;       //Группа получателей. Если получатель 1 равно null
-    private String recipient;   //Получатель. Если получатель не один равно null
+    private String group;       //Название плана публикации TODO изменить название поля, чтоб не путаться
+    private String recipient;   //Адрес получателя, либо название группы
     private String content;     //Содержание контента, который содержится в item
     private int status;
 
@@ -24,16 +24,14 @@ public class EmailSMSItemGetting {
                                 String.valueOf(entity.getDateTimePlayback().getDayOfMonth()),
                                 entity.getDateTimePlayback().format(DateTimeFormatter.ofPattern("HH:mm")));
 
-        /*Достаем имя группы. Если имя null, то получатель один, достаем получателя.
+        /*Достаем группу. Если группа null, то получатель один, достаем адрес получателя.
         Если имя группы не null, то добавляем имя группы в модель
         */
-        if(entity.getGroupName() == null){
-            model.group = "-";
+        if(entity.getGroup() == null){
             model.recipient = entity.getRecipients().get(0).getAddress();
         }
         else{
-            model.recipient = "-";
-            model.group = entity.getGroupName();
+            model.recipient = entity.getGroup().getName();
         }
 
         model.content = entity.getContent().getContent();
