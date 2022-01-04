@@ -26,4 +26,9 @@ public class ContentController {
     public ResponseEntity getSMS(){
         return ResponseEntity.ok(contentService.getAllSMS());
     }
+
+    @GetMapping("Json/PlaylistDeviceSms.json")
+    public ResponseEntity getAllSMSPlaylists(){
+        return ResponseEntity.ok(contentService.getAllSMSPlaylists());
+    }
 }

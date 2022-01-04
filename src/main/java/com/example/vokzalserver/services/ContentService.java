@@ -3,7 +3,9 @@ package com.example.vokzalserver.services;
 import com.example.vokzalserver.entities.ContentEntity;
 import com.example.vokzalserver.models.EmailSMSContentGetting;
 import com.example.vokzalserver.models.ContentPosting;
+import com.example.vokzalserver.models.EverythingForPlaylistGetting;
 import com.example.vokzalserver.repositories.ContentRepository;
+import com.example.vokzalserver.repositories.DeviceRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,9 +15,11 @@ import java.util.stream.Collectors;
 public class ContentService {
 
     private final ContentRepository contentRepository;
+    private final DeviceRepository deviceRepository;
 
-    public ContentService(ContentRepository contentRepository) {
+    public ContentService(ContentRepository contentRepository, DeviceRepository deviceRepository) {
         this.contentRepository = contentRepository;
+        this.deviceRepository = deviceRepository;
     }
 
 
@@ -34,4 +38,13 @@ public class ContentService {
     public List<EmailSMSContentGetting> getAllSMS(){
         return contentRepository.findAll().stream().map(EmailSMSContentGetting::toModel).collect(Collectors.toList());
     }
+
+    public EverythingForPlaylistGetting getAllSMSPlaylists(){
+        List<ContentEntity> c =  contentRepository.findAllPlaylists();
+        return EverythingForPlaylistGetting.toModel(deviceRepository.findAllByType("SMS"),
+                contentRepository.findAllPlaylists(),
+                contentRepository.findAll());
+
+    }
+
 }

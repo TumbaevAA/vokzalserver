@@ -2,7 +2,7 @@ package com.example.vokzalserver.entities;
 
 import javax.persistence.*;
 
-/*Плейлист является контентом. Эта табличка нужна только чтобы показать, какой контент
+/*Плейлист является контентом. Эта табличка нужна, только чтобы показать, какой контент
  * в какой плейлист входит и указать порядковый номер контента в плейлисте
  * */
 @Entity
@@ -33,7 +33,7 @@ public class PlaylistEntity {
     public PlaylistEntity() {
     }
 
-    public Long getId() {
+    public Long getUselessPKDontUse() {
         return uselessPK;
     }
 

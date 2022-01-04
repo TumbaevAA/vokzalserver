@@ -4,8 +4,10 @@ import com.example.vokzalserver.models.ContentPosting;
 
 import javax.persistence.*;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
+//TODO поменять название, чтоб не путаться при поиске содержимого плейлиста
 @Entity
 @Table(name = "content")
 public class ContentEntity {
@@ -97,4 +99,17 @@ public class ContentEntity {
     public List<ItemEntity> getItems() {
         return items;
     }
+
+    public List<ContentEntity> getPlaylistContent(){
+        if (this.playlist == null){
+            return null;
+        }
+
+        List<ContentEntity> playlistContent = new ArrayList();
+        for(PlaylistEntity content : playlist){
+            playlistContent.add(content.getContent());
+        }
+        return playlistContent;
+    }
+
 }
