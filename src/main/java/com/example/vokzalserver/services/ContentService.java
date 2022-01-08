@@ -40,7 +40,6 @@ public class ContentService {
     }
 
     public EverythingForPlaylistGetting getAllSMSPlaylists(){
-        List<ContentEntity> c =  contentRepository.findAllPlaylists();
         return EverythingForPlaylistGetting.toModel(deviceRepository.findAllByType("SMS"),
                 contentRepository.findAllPlaylists(),
                 contentRepository.findAll());

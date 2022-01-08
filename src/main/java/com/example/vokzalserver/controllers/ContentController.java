@@ -17,7 +17,7 @@ public class ContentController {
         this.contentService = contentService;
     }
 
-    @PostMapping("Json/ContentDeviceSmsPost")
+    @PostMapping("Json/ContentDeviceSmsPost.json")
     public ResponseEntity saveSMS(@RequestBody ContentPosting content){
         return ResponseEntity.ok(contentService.saveOrUpdateSMS(content));
     }

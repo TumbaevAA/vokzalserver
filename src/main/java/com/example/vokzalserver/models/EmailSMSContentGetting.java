@@ -7,7 +7,7 @@ public class EmailSMSContentGetting {
     private Long id;
     private String name;
     private String content;
-
+    private int status;
 
     public static EmailSMSContentGetting toModel(ContentEntity entity){
         EmailSMSContentGetting model = new EmailSMSContentGetting();
@@ -15,6 +15,7 @@ public class EmailSMSContentGetting {
         model.id = entity.getId();
         model.name = entity.getName();
         model.content = entity.getContent();
+        model.status = entity.getStatus();
 
         return model;
     }
@@ -33,5 +34,9 @@ public class EmailSMSContentGetting {
 
     public String getContent() {
         return content;
+    }
+
+    public int getStatus() {
+        return status;
     }
 }
