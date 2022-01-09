@@ -1,38 +1,41 @@
 package com.example.vokzalserver.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
+/*Группа является получателем. Эта табличка нужна, чтобы показать
+в какую группу входит получатель*/
 @Entity
 @Table(name = "\"group\"")
 public class GroupEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @Column(name = "useless_pk", nullable = false)
+    private Long uselessPK;
 
-    @Column(name = "name", nullable = false)
-    private String name;
 
-    @ManyToMany
-    @JoinTable(name = "recipient_group",
-            joinColumns = @JoinColumn(name = "group_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "recipient_id", nullable = false))
-    private List<RecipientEntity> recipients;
+    /*group_id это id получателя, который является группой*/
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private RecipientEntity group;
+
+    /*recipient_id это id получателя, который входит в данную группу*/
+    @ManyToOne
+    @JoinColumn(name = "recipient_id")
+    private RecipientEntity recipient;
 
 
     public GroupEntity() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getUselessPKDontUse() {
+        return uselessPK;
     }
 
-    public String getName() {
-        return name;
+    public RecipientEntity getGroup() {
+        return group;
     }
 
-    public List<RecipientEntity> getRecipients() {
-        return recipients;
+    public RecipientEntity getRecipient() {
+        return recipient;
     }
 }

@@ -12,20 +12,18 @@ public class RecipientEntity {
     private Long id;
 
     @Column(name = "address", nullable = false)
-    private String address;
+    private String address;                      //Адрес получателя или название группы
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "item_recipient",
-            joinColumns = @JoinColumn(name = "recipient_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "item_id", nullable = false))
-    private List<ItemEntity> items;
 
-    @ManyToMany
-    @JoinTable(name = "recipient_group",
-            joinColumns = @JoinColumn(name = "recipient_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false))
+    /*Если связь не null, то получатель является группой.
+    *Связь нужна, чтобы доставать получателей группы */
+    @OneToMany(mappedBy = "group")
+    private List<GroupEntity> group;
+
+    /*Через эту связь в таблице group указывается, какие получатели входят в группу.
+     * То есть, если эта связь не null, то этот получатель входит в группы из списка*/
+    @OneToMany(mappedBy = "recipient")
     private List<GroupEntity> groupsThatRecipientBelongsTo;
-
 
     public RecipientEntity() {
     }
@@ -38,8 +36,8 @@ public class RecipientEntity {
         return address;
     }
 
-    public List<ItemEntity> getItems() {
-        return items;
+    public List<GroupEntity> getGroup() {
+        return group;
     }
 
     public List<GroupEntity> getGroupsThatRecipientBelongsTo() {

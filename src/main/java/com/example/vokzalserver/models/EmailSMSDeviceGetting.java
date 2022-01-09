@@ -10,7 +10,7 @@ public class EmailSMSDeviceGetting {
     private String name;
     private String description;
     private int status;
-    private List<EmailSMSItemGetting> publication;
+    private List<EmailSMSPublicationGetting> publication;
 
     public static EmailSMSDeviceGetting toModel(DeviceEntity entity){
         EmailSMSDeviceGetting model = new EmailSMSDeviceGetting();
@@ -22,7 +22,7 @@ public class EmailSMSDeviceGetting {
         /*У смс- и email-устройств один канал, поэтому берем нулевой элемент в списке.
           Далее из каждого itemEntity создаем модель, модели добавляем в поле item */
         model.publication = entity.getChannels().get(0).getItems().
-                stream().map(EmailSMSItemGetting::toModel).collect(Collectors.toList());
+                stream().map(EmailSMSPublicationGetting::toModel).collect(Collectors.toList());
 
         return model;
     }
@@ -47,7 +47,7 @@ public class EmailSMSDeviceGetting {
         return status;
     }
 
-    public List<EmailSMSItemGetting> getPublication() {
+    public List<EmailSMSPublicationGetting> getPublication() {
         return publication;
     }
 }

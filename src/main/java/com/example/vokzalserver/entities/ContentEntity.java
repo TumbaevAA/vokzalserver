@@ -41,7 +41,7 @@ public class ContentEntity {
     private List<PlaylistEntity> playlistsThatContentBelongsTo;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "content")
-    List<ItemEntity> items;
+    List<PublicationEntity> items;
 
 
     public static ContentEntity toEntity(ContentPosting model){
@@ -95,7 +95,7 @@ public class ContentEntity {
         return status;
     }
 
-    public List<ItemEntity> getItems() {
+    public List<PublicationEntity> getItems() {
         return items;
     }
 

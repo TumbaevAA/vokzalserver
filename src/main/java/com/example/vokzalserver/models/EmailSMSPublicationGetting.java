@@ -1,11 +1,11 @@
 package com.example.vokzalserver.models;
 
-import com.example.vokzalserver.entities.ItemEntity;
+import com.example.vokzalserver.entities.PublicationEntity;
 
 import java.time.format.DateTimeFormatter;
 
 
-public class EmailSMSItemGetting {
+public class EmailSMSPublicationGetting {
     private Long id;
     private String name;        //Имя контента, который содержится в item
     private Date date;
@@ -14,8 +14,8 @@ public class EmailSMSItemGetting {
     private String content;     //Содержание контента, который содержится в item
     private int status;
 
-    public static EmailSMSItemGetting toModel(ItemEntity entity){
-        EmailSMSItemGetting model = new EmailSMSItemGetting();
+    public static EmailSMSPublicationGetting toModel(PublicationEntity entity){
+        EmailSMSPublicationGetting model = new EmailSMSPublicationGetting();
 
         model.id = entity.getId();
         model.name = entity.getContent().getName();
@@ -24,16 +24,7 @@ public class EmailSMSItemGetting {
                                 String.valueOf(entity.getDateTimePlayback().getDayOfMonth()),
                                 entity.getDateTimePlayback().format(DateTimeFormatter.ofPattern("HH:mm")));
 
-        /*Достаем группу. Если группа null, то получатель один, достаем адрес получателя.
-        Если имя группы не null, то добавляем имя группы в модель
-        */
-        if(entity.getGroup() == null){
-            model.recipient = entity.getRecipients().get(0).getAddress();
-        }
-        else{
-            model.recipient = entity.getGroup().getName();
-        }
-
+        model.recipient = entity.getRecipient().getAddress();
         model.content = entity.getContent().getContent();
         model.status = entity.getStatus();
 
@@ -41,7 +32,7 @@ public class EmailSMSItemGetting {
     }
 
 
-    public EmailSMSItemGetting() {
+    public EmailSMSPublicationGetting() {
     }
 
     public long getId() {

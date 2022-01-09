@@ -1,6 +1,7 @@
 package com.example.vokzalserver.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 /*Плейлист является контентом. Эта табличка нужна, только чтобы показать, какой контент
  * в какой плейлист входит и указать порядковый номер контента в плейлисте
@@ -29,6 +30,9 @@ public class PlaylistEntity {
     @Column(name = "serial_number")
     private int contentSerialNumber;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipient")
+    List<PublicationEntity> items;
+
 
     public PlaylistEntity() {
     }
@@ -47,5 +51,9 @@ public class PlaylistEntity {
 
     public int getContentSerialNumber() {
         return contentSerialNumber;
+    }
+
+    public List<PublicationEntity> getItems() {
+        return items;
     }
 }

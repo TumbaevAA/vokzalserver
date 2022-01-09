@@ -21,7 +21,7 @@ public class ChannelEntity {
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "channel",
             fetch = FetchType.EAGER)
-    private List<ItemEntity> items;
+    private List<PublicationEntity> items;
 
 
     public ChannelEntity() {
@@ -39,7 +39,7 @@ public class ChannelEntity {
         return name;
     }
 
-    public List<ItemEntity> getItems() {
+    public List<PublicationEntity> getItems() {
         return items;
     }
 }

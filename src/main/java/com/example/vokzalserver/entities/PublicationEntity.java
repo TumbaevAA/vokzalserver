@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "item")
-public class ItemEntity {
+@Table(name = "publication")
+public class PublicationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -20,11 +20,9 @@ public class ItemEntity {
     @JoinColumn(name = "content_id", nullable = false)
     private ContentEntity content;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "item_recipient",
-            joinColumns = @JoinColumn(name = "item_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "recipient_id", nullable = false))
-    private List<RecipientEntity> recipients;
+    @ManyToOne
+    @JoinColumn(name = "recipient_id")
+    private RecipientEntity recipient;
 
     @Column(name = "date_time_playback", nullable = false)
     private LocalDateTime dateTimePlayback;
@@ -33,7 +31,7 @@ public class ItemEntity {
     private int status;
 
 
-    public ItemEntity() {
+    public PublicationEntity() {
     }
 
     public Long getId() {
@@ -48,18 +46,8 @@ public class ItemEntity {
         return content;
     }
 
-    public List<RecipientEntity> getRecipients() {
-        return recipients;
-    }
-
-    public GroupEntity getGroup(){
-        if(this.getRecipients().size() == 1){
-            return null;
-        }
-        else{
-//TODO Алгоритм, который будет брать группы всех получателей и среди них искать одинаковую для всех
-            return this.getRecipients().get(0).getGroupsThatRecipientBelongsTo().get(0);
-        }
+    public RecipientEntity getRecipient() {
+        return recipient;
     }
 
     public LocalDateTime getDateTimePlayback() {
