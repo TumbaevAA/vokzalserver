@@ -17,18 +17,20 @@ public class ContentController {
         this.contentService = contentService;
     }
 
-    @PostMapping("Json/ContentDeviceSmsPost.json")
+    @PostMapping("Json/ContentDeviceSmsPost")
     public ResponseEntity saveSMS(@RequestBody ContentPosting content){
         return ResponseEntity.ok(contentService.saveOrUpdateSMS(content));
     }
 
-    @GetMapping("Json/ContentDeviceSmsGet.json")
+    @GetMapping("Json/ContentDeviceSmsGet")
     public ResponseEntity getSMS(){
         return ResponseEntity.ok(contentService.getAllSMS());
     }
 
-    @GetMapping("Json/PlaylistDeviceSms.json")
+    @GetMapping("Json/PlaylistDeviceSms")
     public ResponseEntity getAllSMSPlaylists(){
         return ResponseEntity.ok(contentService.getAllSMSPlaylists());
     }
+
+
 }

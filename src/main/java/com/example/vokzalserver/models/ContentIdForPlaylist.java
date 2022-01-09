@@ -2,18 +2,18 @@ package com.example.vokzalserver.models;
 
 import com.example.vokzalserver.entities.ContentEntity;
 
-public class ContentIdForPlaylistGetting {
+public class ContentIdForPlaylist {
     private Long id;
 
-    public static ContentIdForPlaylistGetting toModel(ContentEntity entity){
-        ContentIdForPlaylistGetting model = new ContentIdForPlaylistGetting();
+    public static ContentIdForPlaylist toModel(ContentEntity entity){
+        ContentIdForPlaylist model = new ContentIdForPlaylist();
         
         model.id = entity.getId();
 
         return model;
     }
 
-    public ContentIdForPlaylistGetting() {
+    public ContentIdForPlaylist() {
     }
 
     public Long getId() {

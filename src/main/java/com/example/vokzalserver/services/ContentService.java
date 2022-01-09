@@ -26,10 +26,9 @@ public class ContentService {
     public ContentEntity saveOrUpdateSMS(ContentPosting content){
         content.setType("SMS");
 
-        //Если id == null, то контент новый, статус по умолчанию - не проверен
-        if (content.getId() == null){
-            content.setStatus(2);
-        }
+        //При добавлении и изменении контента статус по умолчанию 2 (не проверен)
+        content.setStatus(2);
+
 
         return contentRepository.save(ContentEntity.toEntity(content));
     }
@@ -43,7 +42,6 @@ public class ContentService {
         return EverythingForPlaylistGetting.toModel(deviceRepository.findAllByType("SMS"),
                 contentRepository.findAllPlaylists(),
                 contentRepository.findAll());
-
     }
 
 }

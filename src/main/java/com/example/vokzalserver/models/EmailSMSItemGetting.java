@@ -9,7 +9,7 @@ public class EmailSMSItemGetting {
     private Long id;
     private String name;        //Имя контента, который содержится в item
     private Date date;
-    private String group;       //Название плана публикации TODO изменить название поля, чтоб не путаться
+    private String group;       //Название плана публикации
     private String recipient;   //Адрес получателя, либо название группы
     private String content;     //Содержание контента, который содержится в item
     private int status;

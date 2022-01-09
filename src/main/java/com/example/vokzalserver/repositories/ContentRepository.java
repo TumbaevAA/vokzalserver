@@ -12,4 +12,5 @@ import java.util.List;
 public interface ContentRepository extends JpaRepository<ContentEntity, Long> {
     @Query("SELECT DISTINCT p.playlist FROM PlaylistEntity p")
     List<ContentEntity> findAllPlaylists();
+
 }

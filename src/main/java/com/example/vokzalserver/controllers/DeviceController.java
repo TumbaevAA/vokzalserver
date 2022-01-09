@@ -14,7 +14,7 @@ public class DeviceController {
         this.deviceService = deviceService;
     }
 
-    @GetMapping("Json/SMSDevice.json")
+    @GetMapping("Json/SMSDevice")
     private ResponseEntity getAllSMSDevices(){
         return ResponseEntity.ok(deviceService.getAllSMS());
     }

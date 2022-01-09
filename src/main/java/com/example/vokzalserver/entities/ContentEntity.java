@@ -7,7 +7,6 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO поменять название, чтоб не путаться при поиске содержимого плейлиста
 @Entity
 @Table(name = "content")
 public class ContentEntity {
@@ -56,7 +55,7 @@ public class ContentEntity {
         entity.duration = model.getDuration();
 
         return entity;
-}
+    }
 
 
 
