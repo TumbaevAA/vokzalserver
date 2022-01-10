@@ -19,7 +19,12 @@ public class ContentController {
 
     @PostMapping("Json/ContentDeviceSmsPost")
     public ResponseEntity saveSMS(@RequestBody ContentPosting content){
-        return ResponseEntity.ok(contentService.saveOrUpdateSMS(content));
+        try {
+            return ResponseEntity.ok(contentService.saveOrUpdateSMS(content));
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping("Json/ContentDeviceSmsGet")
