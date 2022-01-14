@@ -18,6 +18,4 @@ public class DeviceController {
     private ResponseEntity getAllSMSDevices(){
         return ResponseEntity.ok(deviceService.getAllSMS());
     }
-
-
 }

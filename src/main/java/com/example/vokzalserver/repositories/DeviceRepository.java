@@ -12,4 +12,5 @@ public interface DeviceRepository extends JpaRepository<DeviceEntity,Long> {
 
     @Query("select d from DeviceEntity d where d.type = ?1")
     List<DeviceEntity> findAllByType(String type);
+
 }

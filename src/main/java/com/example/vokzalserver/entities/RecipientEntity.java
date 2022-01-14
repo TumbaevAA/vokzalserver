@@ -1,6 +1,7 @@
 package com.example.vokzalserver.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,8 +26,13 @@ public class RecipientEntity {
     @OneToMany(mappedBy = "recipient")
     private List<GroupEntity> groupsThatRecipientBelongsTo;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipient")
+    private List<PublicationEntity> publications;
+
+
     public RecipientEntity() {
     }
+
 
     public Long getId() {
         return id;

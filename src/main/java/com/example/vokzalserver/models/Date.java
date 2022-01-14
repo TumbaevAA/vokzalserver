@@ -1,5 +1,8 @@
 package com.example.vokzalserver.models;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 //Этот класс нужен для отображения даты в json так, как требует фронтенд
 public class Date {
     private String year;
@@ -16,6 +19,7 @@ public class Date {
         this.day = day;
         this.time = time;
     }
+
 
     public String getYear() {
         return year;

@@ -22,7 +22,7 @@ public class DeviceService {
         List<DeviceEntity> devicesEntity = deviceRepository.findAllByType("SMS");
 
         /*Для каждого элемента deviceEntity используем функцию EmailSMSDeviceGetting.toModel()*/
-        return devicesEntity.stream().map(EmailSMSDeviceGetting::toModel).collect(Collectors.toList());
-
+        List<EmailSMSDeviceGetting> collect = devicesEntity.stream().map(EmailSMSDeviceGetting::toModel).collect(Collectors.toList());
+        return collect;
     }
 }

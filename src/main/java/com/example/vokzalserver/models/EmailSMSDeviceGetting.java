@@ -21,7 +21,7 @@ public class EmailSMSDeviceGetting {
 
         /*У смс- и email-устройств один канал, поэтому берем нулевой элемент в списке.
           Далее из каждого itemEntity создаем модель, модели добавляем в поле item */
-        model.publication = entity.getChannels().get(0).getItems().
+        model.publication = entity.getChannels().get(0).getPublications().
                 stream().map(EmailSMSPublicationGetting::toModel).collect(Collectors.toList());
 
         return model;

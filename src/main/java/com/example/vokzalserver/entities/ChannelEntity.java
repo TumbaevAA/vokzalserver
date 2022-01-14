@@ -1,6 +1,7 @@
 package com.example.vokzalserver.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,7 +22,7 @@ public class ChannelEntity {
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "channel",
             fetch = FetchType.EAGER)
-    private List<PublicationEntity> items;
+    private List<PublicationEntity> publications;
 
 
     public ChannelEntity() {
@@ -39,7 +40,7 @@ public class ChannelEntity {
         return name;
     }
 
-    public List<PublicationEntity> getItems() {
-        return items;
+    public List<PublicationEntity> getPublications() {
+        return publications;
     }
 }

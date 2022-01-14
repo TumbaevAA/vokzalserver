@@ -12,4 +12,6 @@ public interface RecipientRepository extends JpaRepository<RecipientEntity,Long>
 
     @Query("SELECT r FROM RecipientEntity r WHERE r.id NOT IN (SELECT g.group.id FROM GroupEntity g)")
     List<RecipientEntity> findAllPeople();
+
+    RecipientEntity getByAddress(String address);
 }

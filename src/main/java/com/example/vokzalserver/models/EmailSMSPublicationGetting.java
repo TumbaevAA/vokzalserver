@@ -7,11 +7,11 @@ import java.time.format.DateTimeFormatter;
 
 public class EmailSMSPublicationGetting {
     private Long id;
-    private String name;        //Имя контента, который содержится в item
+    private String name;        //Имя контента, который содержится в publication
     private Date date;
     private String group;       //Название плана публикации
     private String recipient;   //Адрес получателя, либо название группы
-    private String content;     //Содержание контента, который содержится в item
+    private String content;     //Содержание контента, который содержится в publication
     private int status;
 
     public static EmailSMSPublicationGetting toModel(PublicationEntity entity){

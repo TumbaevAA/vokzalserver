@@ -10,7 +10,14 @@ public class ContentPosting {
     private Duration duration;
     private int status;
 
-
+    public ContentPosting(Long id, String name, String type, String content, Duration duration, int status) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.content = content;
+        this.duration = duration;
+        this.setStatus(status);
+    }
 
     public ContentPosting() {
     }

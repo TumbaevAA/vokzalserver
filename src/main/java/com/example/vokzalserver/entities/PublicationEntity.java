@@ -1,8 +1,10 @@
 package com.example.vokzalserver.entities;
 
+import com.example.vokzalserver.models.Date;
+import com.example.vokzalserver.models.PublicationPosting;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "publication")
@@ -30,6 +32,21 @@ public class PublicationEntity {
     @Column(name = "status", nullable = false)
     private int status;
 
+    public static PublicationEntity toEntity(ChannelEntity channel, ContentEntity content,
+                                             RecipientEntity recipient, PublicationPosting publication){
+        PublicationEntity entity = new PublicationEntity();
+
+        entity.channel = channel;
+        entity.content = content;
+        entity.recipient = recipient;
+
+        Date date = publication.getDate();
+        entity.dateTimePlayback = LocalDateTime.parse(date.getYear() + "-" + date.getMonth() + "-" + date.getDay() + "T" + date.getTime());
+
+        entity.status = publication.getStatus();
+
+        return entity;
+    }
 
     public PublicationEntity() {
     }
