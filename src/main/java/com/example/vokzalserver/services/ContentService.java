@@ -35,7 +35,7 @@ public class ContentService {
 
 
     public List<EmailSMSContentGetting> getAllSMS(){
-        return contentRepository.findAll().stream().map(EmailSMSContentGetting::toModel).collect(Collectors.toList());
+        return contentRepository.findAllContent().stream().map(EmailSMSContentGetting::toModel).collect(Collectors.toList());
     }
 
     public EverythingForPlaylistGetting getAllSMSPlaylists(){
